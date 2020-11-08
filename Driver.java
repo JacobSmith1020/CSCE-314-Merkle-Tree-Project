@@ -37,40 +37,72 @@ public class Driver implements ActionListener{
     static JTextField textfield;
     static JTextField textfield2;
     static JTextField textfield3;
+    static JTextField textfield4;
+    static JTextField textfield5;
+    static JTextField textfield6;
+    static JTextField textfield7;
     static JFrame frame;
     static String args = "";
     static String args2 = "";
     static String args3 = "";
     static JButton button;
     static JButton button2;
+    static JButton button3;
+    static JButton button4;
     static JLabel label;
     static JLabel label2;
     static JLabel label3;
+    static JLabel label4;
+    static JLabel label5;
+    static JLabel label6;
+    static JLabel label7;
     static JScrollPane scroll;
     static JTextArea textArea;
     static JTextArea textArea2;
+    static JTextArea textArea3;
+    static JTextArea textArea4;
    
     //Create a Java swing based user interface with buttons that signal various actions
     public static void createUserInterface() {
     	Driver te = new Driver();
     	button = new JButton("Create a Merkle Tree");
     	button.addActionListener(te);
-    	button2 = new JButton("Compare");
+    	button2 = new JButton("Compare Files");
     	button2.addActionListener(te);
+    	button3 = new JButton("Compare File and Merkle Tree");
+    	button3.addActionListener(te);
+    	button4 = new JButton("Compare Merkle Trees");
+    	button4.addActionListener(te);
     	
     	label = new JLabel("Specify the path of the file you wish to make a Merkle Tree out of (for multiple files, seperate by comma):");
     	label2 = new JLabel("Spcifiy the path of the file you wish to compare against:");
     	label3 = new JLabel("Spcifiy the path of the file you wish to compare:");
+    	label4 = new JLabel("Spcifiy the path of the file you wish to compare against:");
+    	label5 = new JLabel("Spcifiy the path of the merkle tree you wish to compare:");
+    	label6 = new JLabel("Spcifiy the path of the merkle tree you wish to compare against:");
+    	label7 = new JLabel("Spcifiy the path of the merkle tree you wish to compare:");
     	
         textfield = new JTextField(80);
         textfield.setPreferredSize(new Dimension(0, 27));
         textfield.setVisible(true);
-        textfield2 = new JTextField(43);
+        textfield2 = new JTextField(42);
         textfield2.setPreferredSize(new Dimension(0, 27));
         textfield2.setVisible(true);
-        textfield3 = new JTextField(43);
+        textfield3 = new JTextField(42);
         textfield3.setPreferredSize(new Dimension(0, 27));
         textfield3.setVisible(true);
+        textfield4 = new JTextField(36);
+        textfield4.setPreferredSize(new Dimension(0, 27));
+        textfield4.setVisible(true);
+        textfield5 = new JTextField(36);
+        textfield5.setPreferredSize(new Dimension(0, 27));
+        textfield5.setVisible(true);
+        textfield6 = new JTextField(35);
+        textfield6.setPreferredSize(new Dimension(0, 27));
+        textfield6.setVisible(true);
+        textfield7 = new JTextField(36);
+        textfield7.setPreferredSize(new Dimension(0, 27));
+        textfield7.setVisible(true);
         
 	    textArea = new JTextArea(20, 147);
 	    textArea.setLineWrap(true);
@@ -80,6 +112,14 @@ public class Driver implements ActionListener{
 	    textArea2.setLineWrap(true);
 	    textArea2.setEditable(false);
 	    textArea2.setVisible(true);
+	    textArea3 = new JTextArea(1, 149);
+	    textArea3.setLineWrap(true);
+	    textArea3.setEditable(false);
+	    textArea3.setVisible(true);
+	    textArea4 = new JTextArea(1, 149);
+	    textArea4.setLineWrap(true);
+	    textArea4.setEditable(false);
+	    textArea4.setVisible(true);
         
     	JPanel panel = new JPanel();
     	panel.add(label);
@@ -98,6 +138,18 @@ public class Driver implements ActionListener{
         panel.add(textfield3);
         panel.add(button2);
         panel.add(textArea2);
+        panel.add(label4);
+        panel.add(textfield4);
+        panel.add(label5);
+        panel.add(textfield5);
+        panel.add(button3);
+        panel.add(textArea3);
+        panel.add(label6);
+        panel.add(textfield6);
+        panel.add(label7);
+        panel.add(textfield7);
+        panel.add(button4);
+        panel.add(textArea4);
         
         frame = new JFrame("MainSwingFrame");
     	frame.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -116,6 +168,8 @@ public class Driver implements ActionListener{
 	      argsArray = args.split(",");
 	      args2 = textfield2.getText();
 	      args3 = textfield3.getText();
+	      
+	      //create and display a merkle tree from a file
 	      if(s == "Create a Merkle Tree") {
 	    	  textArea.setText("");
 	    	  ArrayList<ProcessFileSub> pf = new ArrayList<ProcessFileSub>();
@@ -145,7 +199,8 @@ public class Driver implements ActionListener{
 				  e1.printStackTrace();
 			  }
 	      }
-	      else if(s == "Compare") {
+	      //compare two files
+	      else if(s == "Compare Files") {
 	    	  textArea2.setText("");
 	    	  ProcessFileSub pf = null;
 	    	  ProcessFileSub pf2 = null;
@@ -174,6 +229,11 @@ public class Driver implements ActionListener{
 		      catch (NoSuchAlgorithmException e1) {
 				  e1.printStackTrace();
 			  }
+	      }
+	      else if(s == "Compare File and Merkle Tree") {
+	    	  
+	      }
+	      else if(s == "Compare Merkle Trees") {
 	    	  
 	      }
     }
