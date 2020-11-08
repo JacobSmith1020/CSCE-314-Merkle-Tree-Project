@@ -23,12 +23,14 @@ import java.security.NoSuchAlgorithmException;
 public class MerkleTree {
 	private ArrayList<String> hashList = new ArrayList<String>();//This list will store the hashed results of the data in an array based binary tree format
 	private ArrayList<String> hashListTemp = new ArrayList<String>();
+	private int heightTree;
+	private int sizeofTree;
 	
 	@SuppressWarnings("unchecked")//This is used to suppress warnings that arise when cloning ArrayLists
 	//constructor: Will take in a data set and construct the corresponding merkle tree
 	public MerkleTree(ArrayList<String> dataList) throws NoSuchAlgorithmException {
-		int heightTree = (int)Math.ceil(Math.log10(dataList.size() + 1) / Math.log10(2) - 1);//get height of tree
-		//int sizeofTree = (int)Math.pow(2, heightTree + 1) - 1;//get size of tree
+		heightTree = (int)Math.ceil(Math.log10(dataList.size() + 1) / Math.log10(2) - 1);//get height of tree
+		sizeofTree = (int)Math.pow(2, heightTree + 1) - 1;//get size of tree
 
 		//iterate through leaf nodes first
 		String hash = null;
@@ -36,6 +38,12 @@ public class MerkleTree {
 			hash = hashFunction(dataList.get(i));
 			//hash = dataList.get(i); //TEST VALUES
 			hashList.add(hash);
+		}
+		
+		//handle case where initial height is 1
+		if(heightTree == 1) {
+			hash = hashFunction(hashList.get(0) + hashList.get(1));
+			hashList.add(0, hash);
 		}
 		
 		//iterate through inner nodes
@@ -69,5 +77,9 @@ public class MerkleTree {
 	
 	public ArrayList<String> getMerkleTree() {
 		return hashList;
+	}
+	
+	public int getSize() {
+		return sizeofTree;
 	}
 }
