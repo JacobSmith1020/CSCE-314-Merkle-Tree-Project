@@ -33,7 +33,9 @@ import javax.swing.JTextField;
 public class Driver implements ActionListener{
 	public static ArrayList<String> ar = new ArrayList<String>();
 	public static ArrayList<String> ar2 = new ArrayList<String>();
+	public static ArrayList<String> ar3 = new ArrayList<String>();
 	public static String[] argsArray;
+	public static String[] args5Array;
 	public static String[] args6Array;
 	public static String[] args7Array;
     static JTextField textfield;
@@ -176,13 +178,16 @@ public class Driver implements ActionListener{
 	      args3 = textfield3.getText();
 	      args4 = textfield4.getText();
 	      args5 = textfield5.getText();
+	      //args5 = args5.replace("[", "");
+	      //args5 = args5.replace("]", "");
+	      args5Array = args5.split(",");
 	      args6 = textfield6.getText();
 	      args7 = textfield7.getText();
-	      args6 = args6.replace("[", "");
-	      args6 = args6.replace("]", "");
+	      //args6 = args6.replace("[", "");
+	      //args6 = args6.replace("]", "");
 	      args6Array = args6.split(",");
-	      args7 = args7.replace("[", "");
-	      args7 = args7.replace("]", "");
+	      //args7 = args7.replace("[", "");
+	      //args7 = args7.replace("]", "");
 	      args7Array = args7.split(",");
 	      //System.out.println(Arrays.toString(args6Array));
 	      
@@ -247,7 +252,30 @@ public class Driver implements ActionListener{
 			  }
 	      }
 	      else if(s == "Compare File and Merkle Tree") {
-	    	  
+	    	  textArea3.setText("");
+	    	  ProcessFileSub pf3 = null;
+	    	  try {
+				  pf3 = new ProcessFileSub(args4);
+			  } 
+			  catch (FileNotFoundException e1) {
+				  e1.printStackTrace();
+			  }
+	    	  ar3.add(pf3.getFileContents());
+	    	  try {
+				  MerkleTree<String> mt3 = new MerkleTree<String>(ar3);
+				  System.out.println(args5Array[0]);
+				  System.out.println(mt3.getMerkleTree().get(0));
+				  if(args5Array[0].equals(mt3.getMerkleTree().get(0))) {
+					  textArea3.setText("Both files are the same");
+				  }
+				  else {
+					  textArea3.setText("Files are different");
+				  }
+				  ar3.clear();
+			  } 
+		      catch (NoSuchAlgorithmException e1) {
+				  e1.printStackTrace();
+			  }
 	      }
 	      else if(s == "Compare Merkle Trees") {
 	    	  textArea4.setText("");
