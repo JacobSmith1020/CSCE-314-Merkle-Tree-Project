@@ -8,25 +8,45 @@ package MainPackage;
 //** E-mail:      burgerman1020@tamu.edu
 //** Description: Evaluator: Will compare the hash values of two merkle trees and determine if there are any differences
 
-public class EvaluateFileEquality {
-	private boolean isEqual = false;
-	private MerkleTree mt1 = null;
-	private MerkleTree mt2 = null;
+public class EvaluateFileEquality<type> {//GENERICS REQUIREMENT
+	private boolean isEqual;
+	private String message = "";
 	
 	//constructor: Sets variables mt1 and mt2 and runs the determineEquality function
-	public EvaluateFileEquality(MerkleTree mt1, MerkleTree mt2) {
-		this.mt1 = mt1;
-		this.mt2 = mt2;
+	public EvaluateFileEquality(MerkleTree<type> mt1, MerkleTree<type> mt2) {
 		isEqual = determineEquality(mt1, mt2);
 	}
 	
+	
 	//determine whether two merkle trees are equal or not be comparing hashes
-	private boolean determineEquality(MerkleTree mt1, MerkleTree mt2) {
-		return false;
+	private boolean determineEquality(MerkleTree<type> mt1, MerkleTree<type> mt2) {
+		if(mt1.getSize() == mt2.getSize()) {
+			if(mt1.getMerkleTree().get(0).equals(mt2.getMerkleTree().get(0))) {
+				message = "Both files are the same";
+				return true;
+			}
+			else {
+				message = "Files are different";
+				return false;
+			}
+		}
+		else {
+			if(mt1.getSize() > mt2.getSize()) {
+				message = "The first file has more elements than the second; Files are not the same";
+			}
+			else {
+				message = "The second file has more elements than the first; Files are not the same";
+			}
+			return false;	
+		}
 	}
 	
 	//return the result of the isEqual function
 	public boolean getEquality() {
 		return isEqual;
+	}
+	
+	public String getMessage() {
+		return message;
 	}
 }

@@ -20,7 +20,7 @@ import java.security.NoSuchAlgorithmException;
 //** E-mail:      burgerman1020@tamu.edu
 //** Description: Merkle tree class: This class will make a perfect binary tree of hashed values from the input list
 
-public class MerkleTree {
+public class MerkleTree<type> {//GENERICS REQUIREMENT
 	private ArrayList<String> hashList = new ArrayList<String>();//This list will store the hashed results of the data in an array based binary tree format
 	private ArrayList<String> hashListTemp = new ArrayList<String>();
 	private int heightTree;
@@ -28,14 +28,14 @@ public class MerkleTree {
 	
 	@SuppressWarnings("unchecked")//This is used to suppress warnings that arise when cloning ArrayLists
 	//constructor: Will take in a data set and construct the corresponding merkle tree
-	public MerkleTree(ArrayList<String> dataList) throws NoSuchAlgorithmException {
+	public MerkleTree(ArrayList<type> dataList) throws NoSuchAlgorithmException {
 		heightTree = (int)Math.ceil(Math.log10(dataList.size() + 1) / Math.log10(2) - 1);//get height of tree
 		sizeofTree = (int)Math.pow(2, heightTree + 1) - 1;//get size of tree
 
 		//iterate through leaf nodes first
 		String hash = null;
 		for(int i = 0; i < dataList.size(); i++) {
-			hash = hashFunction(dataList.get(i));
+			hash = hashFunction(dataList.get(i).toString());
 			//hash = dataList.get(i); //TEST VALUES
 			hashList.add(hash);
 		}

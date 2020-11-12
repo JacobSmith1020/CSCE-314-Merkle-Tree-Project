@@ -34,6 +34,8 @@ public class Driver implements ActionListener{
 	public static ArrayList<String> ar = new ArrayList<String>();
 	public static ArrayList<String> ar2 = new ArrayList<String>();
 	public static String[] argsArray;
+	public static String[] args6Array;
+	public static String[] args7Array;
     static JTextField textfield;
     static JTextField textfield2;
     static JTextField textfield3;
@@ -45,6 +47,10 @@ public class Driver implements ActionListener{
     static String args = "";
     static String args2 = "";
     static String args3 = "";
+    static String args4 = "";
+    static String args5 = "";
+    static String args6 = "";
+    static String args7 = "";
     static JButton button;
     static JButton button2;
     static JButton button3;
@@ -79,8 +85,8 @@ public class Driver implements ActionListener{
     	label3 = new JLabel("Spcifiy the path of the file you wish to compare:");
     	label4 = new JLabel("Spcifiy the path of the file you wish to compare against:");
     	label5 = new JLabel("Spcifiy the path of the merkle tree you wish to compare:");
-    	label6 = new JLabel("Spcifiy the path of the merkle tree you wish to compare against:");
-    	label7 = new JLabel("Spcifiy the path of the merkle tree you wish to compare:");
+    	label6 = new JLabel("Spcifiy merkle tree array you wish to compare against:");
+    	label7 = new JLabel("Spcifiy the merkle tree array you wish to compare:");
     	
         textfield = new JTextField(80);
         textfield.setPreferredSize(new Dimension(0, 27));
@@ -97,10 +103,10 @@ public class Driver implements ActionListener{
         textfield5 = new JTextField(36);
         textfield5.setPreferredSize(new Dimension(0, 27));
         textfield5.setVisible(true);
-        textfield6 = new JTextField(35);
+        textfield6 = new JTextField(39);
         textfield6.setPreferredSize(new Dimension(0, 27));
         textfield6.setVisible(true);
-        textfield7 = new JTextField(36);
+        textfield7 = new JTextField(39);
         textfield7.setPreferredSize(new Dimension(0, 27));
         textfield7.setVisible(true);
         
@@ -168,6 +174,17 @@ public class Driver implements ActionListener{
 	      argsArray = args.split(",");
 	      args2 = textfield2.getText();
 	      args3 = textfield3.getText();
+	      args4 = textfield4.getText();
+	      args5 = textfield5.getText();
+	      args6 = textfield6.getText();
+	      args7 = textfield7.getText();
+	      args6 = args6.replace("[", "");
+	      args6 = args6.replace("]", "");
+	      args6Array = args6.split(",");
+	      args7 = args7.replace("[", "");
+	      args7 = args7.replace("]", "");
+	      args7Array = args7.split(",");
+	      //System.out.println(Arrays.toString(args6Array));
 	      
 	      //create and display a merkle tree from a file
 	      if(s == "Create a Merkle Tree") {
@@ -187,8 +204,7 @@ public class Driver implements ActionListener{
 				  ar.add(pf.get(i).getFileContents());
 			  }
 		      try {
-				  MerkleTree mt = new MerkleTree(ar);
-				  System.out.println(mt.getMerkleTree().get(0));System.out.println(mt.getMerkleTree().get(1));System.out.println(mt.getMerkleTree().get(2));
+				  MerkleTree<String> mt = new MerkleTree<String>(ar);
 				  textArea.setText(mt.getMerkleTree().toString());
 				  ar.clear();
 				  pf.clear();
@@ -214,9 +230,9 @@ public class Driver implements ActionListener{
 		      ar.add(pf.getFileContents());
 		      ar2.add(pf2.getFileContents());
 		      try {
-				  MerkleTree mt = new MerkleTree(ar);
-				  MerkleTree mt2 = new MerkleTree(ar2);
-				  EvaluateFileEquality feq = new EvaluateFileEquality(mt, mt2);
+				  MerkleTree<String> mt = new MerkleTree<String>(ar);
+				  MerkleTree<String> mt2 = new MerkleTree<String>(ar2);
+				  EvaluateFileEquality<String> feq = new EvaluateFileEquality<String>(mt, mt2);
 				  if(feq.getEquality() == true) {
 					  textArea2.setText(feq.getMessage());
 				  }
@@ -234,7 +250,15 @@ public class Driver implements ActionListener{
 	    	  
 	      }
 	      else if(s == "Compare Merkle Trees") {
-	    	  
+	    	  textArea4.setText("");
+	    	  System.out.println(args6Array[0]);
+	    	  System.out.println(args7Array[0]);
+	    	  if(args6Array[0].equals(args7Array[0])) {
+	    		  textArea4.setText("Both files are the same");
+	    	  }
+	    	  else {
+	    		  textArea4.setText("Files are different");
+	    	  }
 	      }
     }
 
