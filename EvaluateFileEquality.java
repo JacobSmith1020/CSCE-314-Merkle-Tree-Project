@@ -20,13 +20,32 @@ public class EvaluateFileEquality<type> {//GENERICS REQUIREMENT
 	
 	//determine whether two merkle trees are equal or not be comparing hashes
 	private boolean determineEquality(MerkleTree<type> mt1, MerkleTree<type> mt2) {
+		boolean checking = false;
+		String diff1 = null; 
+		String diff2 = null;
 		if(mt1.getSize() == mt2.getSize()) {
-			if(mt1.getMerkleTree().get(0).equals(mt2.getMerkleTree().get(0))) {
+			for (int i = 0; i < mt1.getSize(); i++)
+			{
+				if (mt1.getMerkleTree().get(i).equals(mt2.getMerkleTree().get(i)))
+					checking = true;
+				if (checking == false)
+				{
+					diff1 = mt1.getMerkleTree().get(i);
+					diff2 = mt2.getMerkleTree().get(i);
+					break;
+				}
+			}
+			if (checking)
+			{
 				message = "Both files are the same";
 				return true;
 			}
+//			if(mt1.getMerkleTree().get(0).equals(mt2.getMerkleTree().get(0))) {
+//				message = "Both files are the same";
+//				return true;
+//			}
 			else {
-				message = "Files are different";
+				message = "Files are different: \tFile1: " + diff1 + "\tVS. \tFile2: " + diff2;
 				return false;
 			}
 		}
