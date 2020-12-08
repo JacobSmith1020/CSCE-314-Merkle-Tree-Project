@@ -1,5 +1,8 @@
 package MainPackage;
 
+//!!!!!!----------COLLECTIONS REQUIREMENT---------------!!!!!!
+//!!!!!!----------COMMENTING REQUIREMENT---------------!!!!!!
+
 import java.util.ArrayList;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -20,7 +23,9 @@ import java.security.NoSuchAlgorithmException;
 //** E-mail:      burgerman1020@tamu.edu
 //** Description: Merkle tree class: This class will make a perfect binary tree of hashed values from the input list
 
-public class MerkleTree<type> {//GENERICS REQUIREMENT
+public class MerkleTree<type> {
+	
+	//COLLECTIONS REQUIREMENT
 	private ArrayList<String> hashList = new ArrayList<String>();//This list will store the hashed results of the data in an array based binary tree format
 	private ArrayList<String> hashListTemp = new ArrayList<String>();
 	private int heightTree;
