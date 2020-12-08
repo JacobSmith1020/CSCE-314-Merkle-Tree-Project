@@ -1,5 +1,8 @@
 package MainPackage;
 
+//!!!!!!----------STUB REQUIREMENT---------------!!!!!!
+//!!!!!!----------DOCUMENTATION REQUIREMENT---------------!!!!!!
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -130,6 +133,7 @@ public class Driver implements ActionListener{
 	    textArea4.setVisible(true);
         
     	JPanel panel = new JPanel();
+        
     	panel.add(label);
         panel.add(textfield);
         panel.add(button);
@@ -168,8 +172,18 @@ public class Driver implements ActionListener{
         frame.setVisible(true);
     }
     
+    //STUB REQUIREMET
+    public boolean merkleTreeStub(MerkleTree<Object> mt1, MerkleTree<Object> mt2) {//stub used to quickly test whether two merkle trees have a root node that is equal to one another
+  	  if(mt1.getMerkleTree().get(0).equals(mt2.getMerkleTree().get(0))) {
+  		  return true;
+  	  }
+  	  else {
+  		  return false;
+  	  }
+    }
+    
     //Will run when a button is clicked within the user interface; Responsible for providing output to the user
-    //C:/Users/Smith/eclipse-workspace/MerkleTreeProject/text.txt
+    //Sample file - C:/Users/Smith/eclipse-workspace/CSCE314Project/text.txt
     public void actionPerformed(ActionEvent e){
 	      String s = e.getActionCommand();
 	      args = textfield.getText();
@@ -263,13 +277,26 @@ public class Driver implements ActionListener{
 	    	  ar3.add(pf3.getFileContents());
 	    	  try {
 				  MerkleTree<String> mt3 = new MerkleTree<String>(ar3);
-				  System.out.println(args5Array[0]);
-				  System.out.println(mt3.getMerkleTree().get(0));
-				  if(args5Array[0].equals(mt3.getMerkleTree().get(0))) {
+				  boolean checking = false;
+				  String diff1 = "";
+				  String diff2 = "";
+				  for (int i = 0; i < mt3.getSize(); i++)
+					{
+						if (mt3.getMerkleTree().get(i).equals(args5Array[i]))
+							checking = true;
+						else
+						{
+							checking = false;
+							diff1 = mt3.getMerkleTree().get(i);
+							diff2 = args5Array[i];
+							break;
+						}
+					}
+				  if(checking) {
 					  textArea3.setText("Both files are the same");
 				  }
 				  else {
-					  textArea3.setText("Files are different");
+					  textArea3.setText("Files are different: \tFile1: " + diff1 + "\tVS. \tFile2: " + diff2);
 				  }
 				  ar3.clear();
 			  } 
@@ -279,13 +306,26 @@ public class Driver implements ActionListener{
 	      }
 	      else if(s == "Compare Merkle Trees") {
 	    	  textArea4.setText("");
-	    	  System.out.println(args6Array[0]);
-	    	  System.out.println(args7Array[0]);
-	    	  if(args6Array[0].equals(args7Array[0])) {
+	    	  boolean checking = false;
+			  String diff1 = "";
+			  String diff2 = "";
+	    	  for (int i = 0; i < args6Array.length; i++)
+				{
+					if (args6Array[i].equals(args7Array[i]))
+						checking = true;
+					else
+					{
+						checking = false;
+						diff1 = args6Array[i];
+						diff2 = args7Array[i];
+						break;
+					}
+				}
+	    	  if(checking) {
 	    		  textArea4.setText("Both files are the same");
 	    	  }
 	    	  else {
-	    		  textArea4.setText("Files are different");
+	    		  textArea4.setText("Files are different: \tFile1: " + diff1 + "\tVS. \tFile2: " + diff2);
 	    	  }
 	      }
     }

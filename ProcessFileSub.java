@@ -1,5 +1,7 @@
 package MainPackage;
 
+//!!!!!!----------INHERITANCE REQUIREMENT---------------!!!!!!
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

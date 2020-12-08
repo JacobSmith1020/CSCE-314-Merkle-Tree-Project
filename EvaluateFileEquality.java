@@ -1,5 +1,7 @@
 package MainPackage;
 
+//!!!!!!----------GENERICS REQUIREMENT---------------!!!!!!
+
 //** File:        EvaluateFileEquality.java
 //** Project:     CSCE 314 Project 1, Fall 2020
 //** Author:      Jacob Smith and Paanery Shah
@@ -28,8 +30,9 @@ public class EvaluateFileEquality<type> {//GENERICS REQUIREMENT
 			{
 				if (mt1.getMerkleTree().get(i).equals(mt2.getMerkleTree().get(i)))
 					checking = true;
-				if (checking == false)
+				else
 				{
+					checking = false;
 					diff1 = mt1.getMerkleTree().get(i);
 					diff2 = mt2.getMerkleTree().get(i);
 					break;
